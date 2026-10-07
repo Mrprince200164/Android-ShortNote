@@ -1,6 +1,6 @@
 import type { Block, ListItem } from "../data/notes";
 import { quickFacts } from "../data/notes";
-import { ArchitectureStack, LifecycleDiagram } from "./Diagrams";
+import { ArchitectureStack, LifecycleDiagram, DataFlowDiagram } from "./Diagrams";
 
 const toneStyles: Record<string, string> = {
   tip: "border-brand-300 bg-brand-50 text-brand-900 dark:border-brand-400/30 dark:bg-brand-400/10 dark:text-brand-100",
@@ -164,6 +164,8 @@ export function BlockView({ block }: { block: Block }) {
           ))}
         </div>
       );
+    case "dataflow":
+      return <DataFlowDiagram />;
     default:
       return null;
   }

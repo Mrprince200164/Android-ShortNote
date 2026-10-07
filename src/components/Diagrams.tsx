@@ -258,3 +258,133 @@ export function LifecycleDiagram() {
     </div>
   );
 }
+
+export function DataFlowDiagram() {
+  const steps = [
+    {
+      num: "01",
+      icon: "🌐",
+      title: "Backend REST API",
+      tech: "Spring Boot / Node / PHP",
+      desc: "Server endpoint වෙතින් JSON දත්ත සපයයි (Ex: /api/v1/products)",
+      badge: "HTTP GET / POST",
+      color: "border-sky-500/40 bg-sky-50 dark:bg-sky-950/30 text-sky-900 dark:text-sky-200",
+    },
+    {
+      num: "02",
+      icon: "⚡",
+      title: "Retrofit + OkHttp",
+      tech: "apiService.getProducts().enqueue()",
+      desc: "Background thread එකක asynchronous HTTP call එකක් යවා JSON response එක ලබා ගනී",
+      badge: "Async Callback",
+      color: "border-indigo-500/40 bg-indigo-50 dark:bg-indigo-950/30 text-indigo-900 dark:text-indigo-200",
+    },
+    {
+      num: "03",
+      icon: "📄",
+      title: "JSON Response & Gson",
+      tech: "GsonConverterFactory",
+      desc: "JSON string එක parse කර Java objects වලට ස්වයංක්‍රීයව පරිවර්තනය කරයි",
+      badge: "@SerializedName mapping",
+      color: "border-amber-500/40 bg-amber-50 dark:bg-amber-950/30 text-amber-900 dark:text-amber-200",
+    },
+    {
+      num: "04",
+      icon: "📦",
+      title: "Data Models (POJO)",
+      tech: "List<ProductModel> / CategoryModel",
+      desc: "UI එකෙන් වෙන්ව දත්ත structured ලෙස තබා ගන්නා model objects සාදයි",
+      badge: "Clean Architecture",
+      color: "border-emerald-500/40 bg-emerald-50 dark:bg-emerald-950/30 text-emerald-900 dark:text-emerald-200",
+    },
+    {
+      num: "05",
+      icon: "🔄",
+      title: "Adapter",
+      tech: "ProductAdapter.updateList()",
+      desc: "Model objects ගෙන ViewHolders වල ඇති UI components වලට bind කරයි",
+      badge: "ViewHolder Pattern",
+      color: "border-purple-500/40 bg-purple-50 dark:bg-purple-950/30 text-purple-900 dark:text-purple-200",
+    },
+    {
+      num: "06",
+      icon: "📱",
+      title: "RecyclerView + LayoutManager",
+      tech: "GridLayoutManager(this, 2)",
+      desc: "Views recycle කරමින් තිරය මත items 2-column grid එකක් ලෙස වේගයෙන් render කරයි",
+      badge: "View Recycling",
+      color: "border-teal-500/40 bg-teal-50 dark:bg-teal-950/30 text-teal-900 dark:text-teal-200",
+    },
+    {
+      num: "07",
+      icon: "🖼️",
+      title: "Android UI & Glide",
+      tech: "Glide.with(ctx).load().into(img)",
+      desc: "පරිශීලකයාට පෙනෙන අවසන් තිරය; images cache වී සුමටව දර්ශනය වේ",
+      badge: "User Interface",
+      color: "border-brand-500/40 bg-brand-50 dark:bg-brand-950/30 text-brand-900 dark:text-brand-200",
+    },
+  ];
+
+  return (
+    <div className="print-page-break my-4 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-white/[0.02]">
+      <div className="mb-5 flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3 dark:border-white/10">
+        <div>
+          <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-brand-600 dark:text-brand-400">
+            Viva Architecture Flow · Question #60
+          </span>
+          <h4 className="si text-lg font-bold text-slate-900 dark:text-white">
+            Android End-to-End Data Flow Architecture
+          </h4>
+        </div>
+        <span className="rounded-full bg-brand-500/10 px-3 py-1 font-mono text-xs font-semibold text-brand-700 dark:text-brand-300">
+          Backend → UI Pipeline
+        </span>
+      </div>
+
+      <div className="relative space-y-3">
+        {steps.map((st, i) => (
+          <div key={st.num} className="relative">
+            <div
+              className={`flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-2xl border p-4 transition-all hover:scale-[1.01] ${st.color}`}
+            >
+              <div className="flex items-start sm:items-center gap-3">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/80 dark:bg-ink-900 shadow-sm text-xl">
+                  {st.icon}
+                </span>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="font-mono text-xs font-extrabold opacity-75">{st.num}</span>
+                    <h5 className="font-bold text-sm sm:text-base">{st.title}</h5>
+                  </div>
+                  <p className="si mt-0.5 text-[13px] opacity-90">{st.desc}</p>
+                </div>
+              </div>
+              <div className="flex sm:flex-col items-start sm:items-end justify-between gap-1 shrink-0">
+                <span className="rounded-lg bg-black/10 dark:bg-white/10 px-2.5 py-1 font-mono text-[11px] font-semibold">
+                  {st.tech}
+                </span>
+                <span className="font-mono text-[10px] uppercase font-bold tracking-wider opacity-70">
+                  {st.badge}
+                </span>
+              </div>
+            </div>
+            {i < steps.length - 1 && (
+              <div className="flex justify-center py-1">
+                <span className="font-mono text-xs font-extrabold text-slate-400 dark:text-slate-500">
+                  ↓
+                </span>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-4 rounded-xl bg-slate-50 dark:bg-ink-950/60 p-3 text-center border border-slate-200/60 dark:border-white/5">
+        <p className="si text-xs text-slate-600 dark:text-slate-300">
+          💡 <strong>විභාගයේදී කෙටියෙන් පැහැදිලි කිරීමට:</strong> Backend API එකෙන් Retrofit හරහා asynchronous request එකක් යවා, ലഭෙන JSON response එක Gson මඟින් Models බවට හරවා, ProductAdapter හරහා RecyclerView එක මඟින් UI එකේ පෙන්වයි.
+        </p>
+      </div>
+    </div>
+  );
+}
