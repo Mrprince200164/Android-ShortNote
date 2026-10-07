@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", "Noto Sans Sinhala", ui-sans-serif, system-ui, sans-serif;
+  --font-si: "Noto Sans Sinhala", "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --color-brand-50: #eafff4;
+  --color-brand-100: #ccffe2;
+  --color-brand-200: #9bffc8;
+  --color-brand-300: #5ffaa8;
+  --color-brand-400: #3ddc84;
+  --color-brand-500: #17c267;
+  --color-brand-600: #0a9e52;
+  --color-brand-700: #0a7d43;
+  --color-brand-800: #0b6238;
+  --color-brand-900: #0a5130;
+
+  --color-ink-50: #f5f7f8;
+  --color-ink-900: #0e1518;
+  --color-ink-950: #080d10;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #3ddc84;
+  color: #06281a;
+}
+
+/* thin scrollbars */
+.thin-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.thin-scroll::-webkit-scrollbar-thumb {
+  background: rgba(61, 220, 132, 0.35);
+  border-radius: 99px;
+}
+.thin-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+.animate-floaty {
+  animation: floaty 6s ease-in-out infinite;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-up {
+  animation: fadeUp 0.5s ease both;
+}
+
+/* Sinhala text needs a bit more line height */
+.si {
+  font-family: var(--font-si);
+  line-height: 1.9;
+  word-break: break-word;
+}
+
+/* ---------- print / save as PDF ---------- */
+@media print {
+  @page {
+    margin: 12mm;
+    size: A4;
+  }
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff !important;
+  }
+  .print-open {
+    display: block !important;
+  }
+  .print-page-break {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  * {
+    box-shadow: none !important;
+    animation: none !important;
+  }
+  pre,
+  .bg-ink-950 {
+    background: #f1f5f9 !important;
+  }
+  pre code {
+    color: #0f172a !important;
+  }
+  .dark .text-slate-100,
+  .dark .text-white {
+    color: #0f172a !important;
+  }
+  a {
+    text-decoration: none;
+    color: #000;
+  }
+}
